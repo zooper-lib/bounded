@@ -20,7 +20,7 @@ Add `bounded` to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  bounded: ^0.0.1
+  bounded: ^1.0.0
 ```
 
 ## Usage
@@ -147,7 +147,7 @@ To use it:
 ```yaml
 dev_dependencies:
   custom_lint: ^0.8.1
-  bounded_lints: ^0.0.1
+  bounded_lints: ^1.0.0
 ```
 
 And enable the plugin:

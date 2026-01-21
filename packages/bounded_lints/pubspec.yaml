@@ -1,6 +1,6 @@
 name: bounded_lints
 description: Custom lints for Domain-Driven Design principles aligned with bounded.
-version: 0.0.1
+version: 1.0.0
 homepage:
 
 environment:
