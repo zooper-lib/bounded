@@ -1,0 +1,15 @@
+name: bounded_lints_example
+publish_to: none
+
+environment:
+  sdk: ">=3.8.1 <4.0.0"
+
+dependencies:
+  bounded:
+    path: ../../bounded
+
+dev_dependencies:
+  custom_lint: ^0.8.1
+  lints: ^6.0.0
+  bounded_lints:
+    path: ../
