@@ -1,0 +1,29 @@
+name: bounded_workspace
+publish_to: none
+
+environment:
+  sdk: ">=3.8.1 <4.0.0"
+
+workspace:
+  - packages/bounded
+  - packages/bounded_lints
+
+dev_dependencies:
+  lints: ^6.0.0
+  melos: ^7.3.0
+
+melos:
+  command:
+    bootstrap:
+      runPubGetInParallel: true
+
+  scripts:
+    analyze:
+      run: dart run melos exec -- "dart analyze"
+      description: Run static analysis for all packages.
+    test:
+      run: dart run melos exec --fail-fast --ignore="bounded_lints_example" -- "dart test"
+      description: Run unit tests for all packages.
+    format:
+      run: dart format .
+      description: Format all Dart code in the workspace.

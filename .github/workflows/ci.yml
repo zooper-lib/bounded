@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - develop
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+
+      - name: Install workspace deps
+        run: dart pub get
+
+      - name: Bootstrap
+        run: dart run melos bootstrap
+
+      - name: Format (check)
+        run: dart format --output=none --set-exit-if-changed .
+
+      - name: Analyze
+        run: dart run melos run analyze --no-select
+
+      - name: Test
+        run: dart run melos run test --no-select
