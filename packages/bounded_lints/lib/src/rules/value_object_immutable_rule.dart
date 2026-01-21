@@ -7,9 +7,9 @@ import '_type_checks.dart';
 
 class ValueObjectImmutableRule extends DartLintRule {
   ValueObjectImmutableRule()
-      : super(
-          code: _code,
-        );
+    : super(
+        code: _code,
+      );
 
   static const _code = LintCode(
     name: 'bounded_value_object_immutable',
