@@ -138,6 +138,26 @@ void main() {
 - **Small API Surface**: Minimal primitives that compose well
 - **Type Safety**: Leverage Dart's type system to prevent errors
 
+## Lints (optional)
+
+This project also ships a companion package, `bounded_lints`, which provides `custom_lint` rules that warn when code violates the domain design principles encouraged by `bounded` (for example: domain event/value object immutability).
+
+To use it:
+
+```yaml
+dev_dependencies:
+  custom_lint: ^0.8.1
+  bounded_lints: ^0.0.1
+```
+
+And enable the plugin:
+
+```yaml
+analyzer:
+  plugins:
+    - custom_lint
+```
+
 ## Additional information
 
 This package is the foundation of a DDD ecosystem. It intentionally excludes:
