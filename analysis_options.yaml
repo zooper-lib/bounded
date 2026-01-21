@@ -57,9 +57,6 @@ linter:
 
 # Analyzer settings.
 analyzer:
-  plugins:
-    - custom_lint
-
   # Exclude certain files or directories from analysis.
   exclude:
     - "**/*.g.dart"
