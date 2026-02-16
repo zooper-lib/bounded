@@ -1,6 +1,6 @@
 name: bounded
 description: "A minimal, framework-agnostic common kernel for Domain-Driven Design (DDD)."
-version: 1.0.0
+version: 2.0.0
 homepage:
 
 environment:

@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-02-16
+
+### Removed
+
+- Event collection from aggregate roots (no longer stores events internally)
+
+## [1.0.0]
+
 ### Added
 
 - Strongly-typed identity primitives (`Identity` interface, `TypedIdentity` class)
@@ -15,7 +23,3 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Aggregate root base class for domain model entry points
 - Domain event interface (`DomainEvent`)
 - Pure Dart package with no infrastructure dependencies
-
-### Removed
-
-- Event collection from aggregate roots (no longer stores events internally)
