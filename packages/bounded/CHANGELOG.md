@@ -12,7 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Strongly-typed identity primitives (`Identity` interface, `TypedIdentity` class)
 - Value object support with structural equality (`ValueObject` mixin)
 - Entity mixin with identity-based equality
-- Aggregate root mixin with domain event collection
+- Aggregate root base class for domain model entry points
 - Domain event interface (`DomainEvent`)
-- Event collection methods on aggregates (record, retrieve, clear)
 - Pure Dart package with no infrastructure dependencies
+
+### Removed
+
+- Event collection from aggregate roots (no longer stores events internally)
