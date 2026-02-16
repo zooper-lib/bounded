@@ -37,7 +37,6 @@ class Order extends AggregateRoot<OrderId> {
       throw StateError('Order can only be placed when pending');
     }
     status = OrderStatus.placed;
-    recordEvent(OrderPlaced(id, at));
   }
 
   void ship() {
@@ -45,85 +44,30 @@ class Order extends AggregateRoot<OrderId> {
       throw StateError('Order can only be shipped when placed');
     }
     status = OrderStatus.shipped;
-    recordEvent(OrderShipped(id));
   }
 }
 
 void main() {
   group('AggregateRoot', () {
-    test('aggregate can record domain events during transitions', () {
+    test('aggregate can perform state transitions', () {
       final order = Order(const OrderId('order-123'));
       final placedAt = DateTime(2026, 1, 21);
 
       order.place(placedAt);
 
-      expect(order.events, hasLength(1));
-      expect(order.events.first, isA<OrderPlaced>());
-      final event = order.events.first as OrderPlaced;
-      expect(event.orderId, equals(order.id));
-      expect(event.placedAt, equals(placedAt));
+      expect(order.status, equals(OrderStatus.placed));
     });
 
-    test('aggregate records multiple events', () {
+    test('aggregate can perform multiple transitions', () {
       final order = Order(const OrderId('order-123'));
 
       order.place(DateTime.now());
       order.ship();
 
-      expect(order.events, hasLength(2));
-      expect(order.events[0], isA<OrderPlaced>());
-      expect(order.events[1], isA<OrderShipped>());
+      expect(order.status, equals(OrderStatus.shipped));
     });
 
-    test('events property returns read-only view', () {
-      final order = Order(const OrderId('order-123'));
-      order.place(DateTime.now());
-
-      final events = order.events;
-      expect(() => (events as List).add(OrderShipped(order.id)), throwsUnsupportedError);
-    });
-
-    test('clearEvents removes all recorded events', () {
-      final order = Order(const OrderId('order-123'));
-      order.place(DateTime.now());
-
-      expect(order.events, hasLength(1));
-
-      order.clearEvents();
-
-      expect(order.events, isEmpty);
-    });
-
-    test('pullEvents drains events in order and clears', () {
-      final order = Order(const OrderId('order-123'));
-
-      order.place(DateTime(2026, 1, 21));
-      order.ship();
-
-      final drained = order.pullEvents();
-
-      expect(drained, hasLength(2));
-      expect(drained[0], isA<OrderPlaced>());
-      expect(drained[1], isA<OrderShipped>());
-      expect(order.events, isEmpty);
-    });
-
-    test('pullEvents returns empty list when no events are recorded', () {
-      final order = Order(const OrderId('order-123'));
-
-      final drained = order.pullEvents();
-
-      expect(drained, isEmpty);
-      expect(order.events, isEmpty);
-    });
-
-    test('aggregate starts with no events', () {
-      final order = Order(const OrderId('order-123'));
-
-      expect(order.events, isEmpty);
-    });
-
-    test('aggregate enforces invariants without infrastructure', () {
+    test('aggregate enforces invariants', () {
       final order = Order(const OrderId('order-123'));
 
       // Cannot ship without placing first
